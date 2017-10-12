@@ -88,8 +88,10 @@ someAsyncThingie(function (err, someValue) {
 
 ### Full documentation on parameters
 
+```
 options.obj:	object	- Object to have its keys checked
 options.objectKey:	string	- object key name
 options.default:	any	- The default value if it does not exist
 options.defaultLabel:	string	- What to print in the log as the default value (will default to "default" if it is a string)
 options.retries:	integer	- used internally. Set to 10+ to have the method immediately set the default value or fail if the key does not exist
+```
