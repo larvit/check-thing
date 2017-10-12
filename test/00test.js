@@ -38,9 +38,10 @@ describe('Unit tests', function () {
 	it('should set a default value', function (done) {
 		const	obj	= {'foo': 'bar'};
 
-		checkObjKey({'obj': obj, 'objectKey': 'beng', 'default': 'funk'}, function (err) {
+		checkObjKey({'obj': obj, 'objectKey': 'beng', 'default': 'funk'}, function (err, warning) {
 			if (err) throw err;
 			assert.strictEqual(obj.beng,	'funk');
+			assert.strictEqual(warning,	'obj["beng"] is not set, setting default: "funk"');
 			done();
 		});
 	});

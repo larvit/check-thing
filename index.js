@@ -13,10 +13,12 @@ const	topLogPrefix	= 'check-object-key: index.js: ',
  *		'defaultLabel':	string	- What to print in the log as the default value (will default to "default" if it is a string)
  * 		'retries': integer	- used internally. Set to 10+ to have the method immediately set the default value or fail if the key does not exist
  * 	}
- * @param cb {func} cb(err) returns error on error and nothing on no error
+ * @param cb {func} cb(err, waring) err = critical, warning for example setting default value
  */
 function checkObjKey(options, cb) {
 	const	logPrefix	= topLogPrefix + 'checkObjKey() - objectKey: "' + options.objectKey + '" - ';
+
+	let	warning;
 
 	if (typeof options !== 'object') {
 		const	err	= new Error('options must be an object');
@@ -64,9 +66,11 @@ function checkObjKey(options, cb) {
 		// Fallback to the default
 		if (options.default) {
 			if (options.defaultLabel) {
-				log.warn(logPrefix + 'obj["' + options.objectKey + '"] is not set, setting default: "' + options.defaultLabel + '"');
+				warning	= 'obj["' + options.objectKey + '"] is not set, setting default: "' + options.defaultLabel + '"';
+				log.verbose(logPrefix + warning);
 			} else {
-				log.warn(logPrefix + 'obj["' + options.objectKey + '"] is not set, setting default');
+				warning	= 'obj["' + options.objectKey + '"] is not set, setting default';
+				log.verbose(logPrefix + warning);
 			}
 			options.obj[options.objectKey]	= options.default;
 
@@ -74,7 +78,7 @@ function checkObjKey(options, cb) {
 		} else {
 			const	err	= new Error('obj["' + options.objectKey + '"] is not set, can not start.');
 			log.error(logPrefix + err.message);
-			return cb(err);
+			return cb(err, warning);
 		}
 
 	// Retry
@@ -86,7 +90,7 @@ function checkObjKey(options, cb) {
 		return;
 	}
 
-	cb();
+	cb(undefined, warning);
 }
 
 exports = module.exports = checkObjKey;

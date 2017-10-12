@@ -44,10 +44,11 @@ checkKey({
 	'obj':	obj,
 	'objectKey':	'foo',
 	'default':	'blut'
-}, function (err) {
+}, function (err, warning) {
 	if (err) throw err;
 
 	console.log(obj.foo); // "blut"
+	console.log(warning); // obj["foo"] is not set, setting default: "blut"
 });
 ```
 
