@@ -1,5 +1,5 @@
 {
-  "name": "check-object-thing",
+  "name": "check-object-key",
   "version": "0.1.0",
   "description": "Checking a thing",
   "main": "index.js",
