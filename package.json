@@ -1,0 +1,26 @@
+{
+  "name": "check-object-thing",
+  "version": "0.1.0",
+  "description": "Checking a thing",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/larvit/check-thing.git"
+  },
+  "keywords": [
+    "utils"
+  ],
+  "author": "lilleman <lilleman@larvit.se>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/larvit/check-thing/issues"
+  },
+  "homepage": "https://github.com/larvit/check-thing#readme",
+  "devDependencies": {
+    "mocha": "^4.0.1",
+    "mocha-eslint": "^4.1.0"
+  }
+}
