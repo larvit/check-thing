@@ -84,7 +84,6 @@ someAsyncThingie(function (err, someValue) {
 });
 ```
 
-
 ### Full documentation on parameters
 
 options.obj:	object	- Object to have its keys checked
