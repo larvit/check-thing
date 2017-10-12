@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/larvit/check-object-key.svg?branch=master)](https://travis-ci.org/larvit/check-object-key) [![Dependencies](https://david-dm.org/larvit/check-object-key.svg)](https://david-dm.org/larvit/check-object-key.svg)
+
 # Check object key
 
 Standardized way to check an objects key, setting defaults, timing out etc.
