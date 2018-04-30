@@ -11,8 +11,8 @@ const	topLogPrefix	= 'check-object-key: index.js: ',
  *		'objectKey':	string	- object key name
  *		'default':	any	- The default value if it does not exist
  *		'defaultLabel':	string	- What to print in the log as the default value (will default to "default" if it is a string)
- * 		'retries': integer	- used internally. Set to 10+ to have the method immediately set the default value or fail if the key does not exist
- * 	}
+ *		'retries': integer	- used internally. Set to 10+ to have the method immediately set the default value or fail if the key does not exist
+ *	}
  * @param cb {func} cb(err, waring) err = critical, warning for example setting default value
  */
 function checkObjKey(options, cb) {
