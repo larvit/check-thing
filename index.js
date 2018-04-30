@@ -16,9 +16,12 @@ const	topLogPrefix	= 'check-object-key: index.js: ',
  * @param cb {func} cb(err, waring) err = critical, warning for example setting default value
  */
 function checkObjKey(options, cb) {
-	const	logPrefix	= topLogPrefix + 'checkObjKey() - objectKey: "' + options.objectKey + '" - ';
+	let	logPrefix	= topLogPrefix + 'checkObjKey() - ',
+		warning;
 
-	let	warning;
+	if (typeof cb !== 'function') {
+		cb	= function () {};
+	}
 
 	if (typeof options !== 'object') {
 		const	err	= new Error('options must be an object');
@@ -38,9 +41,7 @@ function checkObjKey(options, cb) {
 		return cb(err);
 	}
 
-	if (typeof cb !== 'function') {
-		cb	= function () {};
-	}
+	logPrefix += 'objectKey: "' + options.objectKey + '" - ';
 
 	if (options.retries === undefined) {
 		options.retries	= 0;
@@ -65,13 +66,8 @@ function checkObjKey(options, cb) {
 
 		// Fallback to the default
 		if (options.default) {
-			if (options.defaultLabel) {
-				warning	= 'obj["' + options.objectKey + '"] is not set, setting default: "' + options.defaultLabel + '"';
-				log.verbose(logPrefix + warning);
-			} else {
-				warning	= 'obj["' + options.objectKey + '"] is not set, setting default';
-				log.verbose(logPrefix + warning);
-			}
+			warning	= 'obj["' + options.objectKey + '"] is not set, setting default: "' + options.defaultLabel + '"';
+			log.verbose(logPrefix + warning);
 			options.obj[options.objectKey]	= options.default;
 
 		// No default exists, return with error!

@@ -1,7 +1,7 @@
 'use strict';
 
 const	checkObjKey	= require(__dirname + '/../index.js'),
-	assert	= require('assert'),
+	test	= require('tape'),
 	log	= require('winston');
 
 // Set up winston
@@ -13,55 +13,94 @@ log.remove(log.transports.Console);
 	'json':	false
 });/**/
 
-describe('Unit tests', function () {
-	this.slow(1500);
-	this.timeout(3000);
+test('should check if a value exists', function (t) {
+	const	obj	= {'foo': 'bar'};
 
-	it('should check if a value exists', function (done) {
-		const	obj	= {'foo': 'bar'};
-
-		checkObjKey({'obj': obj, 'objectKey': 'foo'}, function (err) {
-			if (err) throw err;
-			done();
-		});
+	checkObjKey({'obj': obj, 'objectKey': 'foo'}, function (err) {
+		if (err) throw err;
+		t.end();
 	});
+});
 
-	it('should check if a value exists that does not', function (done) {
-		const	obj	= {'foo': 'bar'};
+test('should check if a value exists that does not', function (t) {
+	const	obj	= {'foo': 'bar'};
 
-		checkObjKey({'obj': obj, 'objectKey': 'beng'}, function (err) {
-			assert(err instanceof Error);
-			done();
-		});
+	checkObjKey({'obj': obj, 'objectKey': 'beng'}, function (err) {
+		t.equal(err instanceof Error,	true);
+		t.end();
 	});
+});
 
-	it('should set a default value', function (done) {
-		const	obj	= {'foo': 'bar'};
+test('should set a default value', function (t) {
+	const	obj	= {'foo': 'bar'};
 
-		checkObjKey({'obj': obj, 'objectKey': 'beng', 'default': 'funk'}, function (err, warning) {
-			if (err) throw err;
-			assert.strictEqual(obj.beng,	'funk');
-			assert.strictEqual(warning,	'obj["beng"] is not set, setting default: "funk"');
-			done();
-		});
+	checkObjKey({'obj': obj, 'objectKey': 'beng', 'default': 'funk'}, function (err, warning) {
+		if (err) throw err;
+		t.equal(obj.beng,	'funk');
+		t.equal(warning,	'obj["beng"] is not set, setting default: "funk"');
+		t.end();
 	});
+});
 
-	it('should fail if the given value is not in the validValues array', function (done) {
-		const	obj	= {'foo': 'bar', 'beng': 'torsk'};
+test('should set a default value and label', function (t) {
+	const	obj	= {'foo': 'bar'};
 
-		checkObjKey({'obj': obj, 'objectKey': 'beng', 'validValues': ['bisse', 'bosse']}, function (err) {
-			assert(err instanceof Error);
-			done();
-		});
+	checkObjKey({
+		'obj':	obj,
+		'objectKey':	'beng',
+		'default':	'funk',
+		'defaultLabel':	'booyah'
+	}, function (err, warning) {
+		if (err) throw err;
+		t.equal(obj.beng,	'funk');
+		t.equal(warning,	'obj["beng"] is not set, setting default: "booyah"');
+		t.end();
 	});
+});
 
-	it('should validate a value in the validValues array', function (done) {
-		const	obj	= {'foo': 'bar', 'beng': 'torsk'};
+test('should fail if the given value is not in the validValues array', function (t) {
+	const	obj	= {'foo': 'bar', 'beng': 'torsk'};
 
-		checkObjKey({'obj': obj, 'objectKey': 'beng', 'validValues': ['bisse', 'torsk']}, function (err) {
-			if (err) throw err;
-			assert.strictEqual(obj.beng,	'torsk');
-			done();
-		});
+	checkObjKey({'obj': obj, 'objectKey': 'beng', 'validValues': ['bisse', 'bosse']}, function (err) {
+		t.equal(err instanceof Error,	true);
+		t.end();
+	});
+});
+
+test('should validate a value in the validValues array', function (t) {
+	const	obj	= {'foo': 'bar', 'beng': 'torsk'};
+
+	checkObjKey({'obj': obj, 'objectKey': 'beng', 'validValues': ['bisse', 'torsk']}, function (err) {
+		if (err) throw err;
+		t.equal(obj.beng,	'torsk');
+		t.end();
+	});
+});
+
+test('should return error if options is not an object', function (t) {
+	checkObjKey('foo', function (err) {
+		t.equal(err instanceof Error,	true);
+		t.end();
+	});
+});
+
+test('should return error if options.obj is not an object', function (t) {
+	checkObjKey({}, function (err) {
+		t.equal(err instanceof Error,	true);
+		t.end();
+	});
+});
+
+test('should work even if cb is not given', function (t) {
+	checkObjKey();
+	t.end();
+});
+
+test('should return error if objectKey is not valid', function (t) {
+	const	obj	= {'foo': 'bar'};
+
+	checkObjKey({'obj': obj, 'objectKey': {}}, function (err) {
+		t.equal(err instanceof Error,	true);
+		t.end();
 	});
 });

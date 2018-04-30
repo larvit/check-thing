@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/larvit/check-object-key.svg?branch=master)](https://travis-ci.org/larvit/check-object-key) [![Dependencies](https://david-dm.org/larvit/check-object-key.svg)](https://david-dm.org/larvit/check-object-key.svg)
+[![Coverage Status](https://coveralls.io/repos/github/larvit/check-object-key/badge.svg)](https://coveralls.io/github/larvit/check-object-key)
 
 # Check object key
 
