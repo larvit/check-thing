@@ -74,6 +74,7 @@ function checkObjKey(options, cb) {
 		} else {
 			const	err	= new Error('obj["' + options.objectKey + '"] is not set, can not start.');
 			log.error(logPrefix + err.message);
+			log.verbose(logPrefix + err.stack);
 			return cb(err, warning);
 		}
 
