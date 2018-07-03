@@ -47,8 +47,10 @@ function checkObjKey(options, cb) {
 		options.retries	= 0;
 	}
 
-	if (typeof options.default === 'string' && options.defaultLabel === undefined) {
-		options.defaultLabel	= options.default;
+	if ((typeof options.default) === 'string' && options.defaultLabel === undefined) {
+		options.defaultLabel	= '"' + options.default + '"';
+	} else if ( ! options.defaultLabel) {
+		options.defaultLabel	= String(options.default);
 	}
 
 	log.silly(logPrefix + 'retry: ' + options.retries);
@@ -65,8 +67,8 @@ function checkObjKey(options, cb) {
 	} else if (options.retries > 10) {
 
 		// Fallback to the default
-		if (options.default) {
-			warning	= 'obj["' + options.objectKey + '"] is not set, setting default: "' + options.defaultLabel + '"';
+		if (Object.keys(options).indexOf('default') !== - 1) {
+			warning	= 'obj["' + options.objectKey + '"] is not set, setting default: ' + options.defaultLabel;
 			log.verbose(logPrefix + warning);
 			options.obj[options.objectKey]	= options.default;
 

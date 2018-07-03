@@ -42,6 +42,28 @@ test('should set a default value', function (t) {
 	});
 });
 
+test('should set a null default value', function (t) {
+	const	obj	= {'foo': 'bar'};
+
+	checkObjKey({'obj': obj, 'objectKey': 'beng', 'default': null}, function (err, warning) {
+		if (err) throw err;
+		t.equal(obj.beng,	null);
+		t.equal(warning,	'obj["beng"] is not set, setting default: null');
+		t.end();
+	});
+});
+
+test('should set an explicitly undefined default value', function (t) {
+	const	obj	= {'foo': 'bar'};
+
+	checkObjKey({'obj': obj, 'objectKey': 'beng', 'default': undefined}, function (err, warning) {
+		if (err) throw err;
+		t.equal(obj.beng,	undefined);
+		t.equal(warning,	'obj["beng"] is not set, setting default: undefined');
+		t.end();
+	});
+});
+
 test('should set a default value and label', function (t) {
 	const	obj	= {'foo': 'bar'};
 
@@ -53,7 +75,7 @@ test('should set a default value and label', function (t) {
 	}, function (err, warning) {
 		if (err) throw err;
 		t.equal(obj.beng,	'funk');
-		t.equal(warning,	'obj["beng"] is not set, setting default: "booyah"');
+		t.equal(warning,	'obj["beng"] is not set, setting default: booyah');
 		t.end();
 	});
 });
