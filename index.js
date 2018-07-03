@@ -76,6 +76,7 @@ function checkObjKey(options, cb) {
 		if (Object.keys(options).indexOf('default') !== - 1) {
 			warning	= 'obj["' + options.objectKey + '"] is not set, setting default: ' + options.defaultLabel;
 			log.verbose(logPrefix + warning);
+			log.verbose(logPrefix + options.orgStack);
 			options.obj[options.objectKey]	= options.default;
 
 		// No default exists, return with error!
