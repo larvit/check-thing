@@ -41,6 +41,12 @@ function checkObjKey(options, cb) {
 		return cb(err);
 	}
 
+	if ( ! options.orgStack) {
+		const	err	= new Error('Stack');
+
+		options.orgStack	= err.stack;
+	}
+
 	logPrefix += 'objectKey: "' + options.objectKey + '" - ';
 
 	if (options.retries === undefined) {
@@ -77,7 +83,7 @@ function checkObjKey(options, cb) {
 			const	err	= new Error('obj["' + options.objectKey + '"] is not set, can not start.');
 			warning	= err.message;
 			log.error(logPrefix + err.message);
-			log.verbose(logPrefix + err.stack);
+			log.verbose(logPrefix + options.orgStack);
 			return cb(err, warning);
 		}
 
