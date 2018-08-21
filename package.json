@@ -27,6 +27,6 @@
     "tape-eslint": "1.2.1"
   },
   "dependencies": {
-    "winston": "^2.4.0"
+    "winston": "^3.0.0"
   }
 }
