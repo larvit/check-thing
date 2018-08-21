@@ -1,6 +1,6 @@
 {
   "name": "check-object-key",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Checking a thing",
   "main": "index.js",
   "scripts": {
@@ -27,6 +27,6 @@
     "tape-eslint": "1.2.1"
   },
   "dependencies": {
-    "winston": "^3.0.0"
+    "larvitutils": "^2.1.0"
   }
 }
