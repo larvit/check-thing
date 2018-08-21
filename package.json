@@ -20,11 +20,11 @@
   },
   "homepage": "https://github.com/larvit/check-object-key#readme",
   "devDependencies": {
-    "coveralls": "^3.0.0",
-    "eslint": "^4.13.0",
-    "istanbul": "^0.4.5",
-    "tape": "^4.8.0",
-    "tape-eslint": "^1.2.1"
+    "coveralls": "3.0.2",
+    "eslint": "4.19.1",
+    "istanbul": "0.4.5",
+    "tape": "4.9.1",
+    "tape-eslint": "1.2.1"
   },
   "dependencies": {
     "winston": "^2.4.0"
