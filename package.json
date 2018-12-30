@@ -1,6 +1,6 @@
 {
   "name": "check-object-key",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Checking a thing",
   "main": "index.js",
   "scripts": {
