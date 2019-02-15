@@ -22,7 +22,7 @@
   "devDependencies": {
     "coveralls": "3.0.2",
     "eslint": "5.13.0",
-    "nyc": "13.2.0",
+    "nyc": "13.3.0",
     "tape": "4.10.1",
     "tape-eslint": "1.2.1"
   },
