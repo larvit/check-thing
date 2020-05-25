@@ -27,6 +27,6 @@
     "tape-eslint": "1.2.1"
   },
   "dependencies": {
-    "larvitutils": "^2.1.0"
+    "larvitutils": "^4.0.0"
   }
 }
